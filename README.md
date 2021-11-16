@@ -25,10 +25,10 @@ const compexity = new Complexity({
     lowercase    : 1,  // a through z
     special      : 1,  // ! @ # $ & *
     digit        : 1,  // 0 through 9
-    alphaNumeric : 1,  // a through Z
-    min          : 8,  // minumum number of characters
-    max          : 16, // silly idea to have maximum...
-    exact        : 20  // also kinda silly
+    alphaNumeric : 1,  // a through Z and 0 through 9
+    min          : 8,  // minumum number of chars
+    max          : 16, // maximum number of chars (not recommended)
+    exact        : 20  // exact number of chars (not recommended)
 });
 ```
 
