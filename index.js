@@ -20,8 +20,12 @@ const lengthOptions = {
 
 /**
  * @class
+ *
+ * @prop {Object} opts Options Object
+ * @prop {RegExp} regex Build Regexp
  */
 class Complexity {
+
     /**
      * @constructor
      *
@@ -35,7 +39,9 @@ class Complexity {
      * @param {Number} opts.max             Maximum number of chars
      * @param {Number} opts.exact           Exact number of chars
      */
-    constructor(opts) {
+    constructor(opts = {}) {
+        this.opts = opts;
+
         let regex = '^';
 
         for (const key in regexOptions) {
