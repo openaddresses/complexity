@@ -5,7 +5,6 @@ const regexOptions = {
     special      : '.*[^A-Za-z0-9]',
     digit        : '.*[0-9]',
     lowercase    : '.*[a-z]',
-    upperLower   : '.*[a-zA-Z]',
     alphaNumeric : '.*[a-zA-Z0-9]'
 };
 
@@ -37,8 +36,6 @@ const lengthOptions = {
 class Complexity {
     constructor(opts = {}) {
         this.opts = opts;
-
-        const opts = ['uppercase'];
 
         for (const key of Object.keys(opts)) {
             if (!isNumber(opts[key])) throw new Error(`${key} option must be numeric`);

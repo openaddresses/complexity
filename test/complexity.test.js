@@ -176,16 +176,51 @@ test('Complexity(uppercase/min)', (t) => {
     t.end();
 });
 
-test('Complexity(uppercase/digits)', (t) => {
+test('Complexity(uppercase/lowercase/min)', (t) => {
     try {
         const c = new Complexity({
-            min: 4,
+            min: 5,
+            lowercase: 2,
             uppercase: 2
+
         });
 
-        t.equals(c.check('eDAFB'), true)
-        t.equals(c.check('eDafe'), false)
-        t.equals(c.check('EE'), false)
+        t.equals(c.check('eeEE'), false);
+        t.equals(c.check('eEeE!'), true);
+        t.equals(c.check('eeEeee'), false);
+        t.equals(c.check('eEEEEE'), false);
+    } catch (err) {
+        t.error(err, 'no errors');
+    }
+
+    t.end();
+});
+
+test('Complexity(digit)', (t) => {
+    try {
+        const c = new Complexity({
+            digit: 2
+
+        });
+
+        t.equals(c.check('1ee'), false);
+        t.equals(c.check('1ee2'), true);
+    } catch (err) {
+        t.error(err, 'no errors');
+    }
+
+    t.end();
+});
+
+test('Complexity(special)', (t) => {
+    try {
+        const c = new Complexity({
+            special: 2
+        });
+
+        t.equals(c.check('12aa'), false);
+        t.equals(c.check('12aa!'), false);
+        t.equals(c.check('12aa!@!'), true);
     } catch (err) {
         t.error(err, 'no errors');
     }
