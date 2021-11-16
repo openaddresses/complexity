@@ -23,22 +23,18 @@ const lengthOptions = {
  *
  * @prop {Object} opts Options Object
  * @prop {RegExp} regex Build Regexp
+ *
+ * @param {Object} opts                 Options Object
+ * @param {number} opts.uppercase       Number of required chars - A through Z
+ * @param {number} opts.lowercase       Number of required chars - a through z
+ * @param {number} opts.special         Number of required chars - ! @ # $ & *
+ * @param {number} opts.digit           Number of required chars - 0 through 9
+ * @param {number} opts.alphaNumeric    Number of required chars - a through Z
+ * @param {number} opts.min             Minumum number of chars
+ * @param {number} opts.max             Maximum number of chars
+ * @param {number} opts.exact           Exact number of chars
  */
 class Complexity {
-
-    /**
-     * @constructor
-     *
-     * @param {Object} opts                 Options Object
-     * @param {Number} opts.uppercase       Number of required chars - A through Z
-     * @param {Number} opts.lowercase       Number of required chars - a through z
-     * @param {Number} opts.special         Number of required chars - ! @ # $ & *
-     * @param {Number} opts.digit           Number of required chars - 0 through 9
-     * @param {Number} opts.alphaNumeric    Number of required chars - a through Z
-     * @param {Number} opts.min             Minumum number of chars
-     * @param {Number} opts.max             Maximum number of chars
-     * @param {Number} opts.exact           Exact number of chars
-     */
     constructor(opts = {}) {
         this.opts = opts;
 
@@ -65,11 +61,26 @@ class Complexity {
         this.regex = new RegExp(regex);
     }
 
-    check(str) {
-        return this.regex.test(str);
+    /**
+     * Check a string against the built password rules
+     *
+     * @param {string} password Password to check
+     *
+     * @returns {boolean}
+     */
+    check(password='') {
+        return this.regex.test(password);
     }
 
-    checkError(str, options) {
+    /**
+     * Check a string against the built password rules
+     * and return which rules the password failed to fulfill
+     *
+     * @param {string} password Password to check
+     *
+     * @returns {Object}
+     */
+    checkError(password='') {
         const tempOption = {};
         const optionLength = {
             min   : options.min,
@@ -77,19 +88,18 @@ class Complexity {
             exact : options.exact
         };
         const returnObject = {};
-        str = str || '';
 
         for (const key in regexOptions) {
             if (isNumber(options[key])) {
                 tempOption[key]   = options[key];
-                returnObject[key] = this.check(str, tempOption);
+                returnObject[key] = this.check(password, tempOption);
                 delete tempOption[key];
             }
         }
         for (const key in optionLength) {
             if (isNumber(optionLength[key])) {
                 tempOption[key]   = optionLength[key];
-                returnObject[key] = this.check(str, tempOption);
+                returnObject[key] = this.check(password, tempOption);
                 delete tempOption[key];
             }
         }
