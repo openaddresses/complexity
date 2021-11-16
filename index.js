@@ -29,7 +29,7 @@ const lengthOptions = {
  * @param {number} opts.lowercase       Number of required chars - a through z
  * @param {number} opts.special         Number of required chars - ! @ # $ & *
  * @param {number} opts.digit           Number of required chars - 0 through 9
- * @param {number} opts.alphaNumeric    Number of required chars - a through Z
+ * @param {number} opts.alphaNumeric    Number of required chars - a through Z / 0 through 9
  * @param {number} opts.min             Minumum number of chars
  * @param {number} opts.max             Maximum number of chars
  * @param {number} opts.exact           Exact number of chars
@@ -44,6 +44,8 @@ class Complexity {
 
         if (opts.exact !== undefined && (opts.min !== undefined || opts.max !== undefined)) {
             throw new Error('exact and min/max options cannot be used together');
+        } else if (opts.alphaNumeric !== undefined && (opts.lowercase !== undefined || opts.uppercase !== undefined || opts.digit !== undefined)) {
+            throw new Error('alphaNumeric and lowercase/upercase/digit options cannot be used together');
         }
 
         let regex = '^';
