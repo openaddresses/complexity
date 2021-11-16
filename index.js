@@ -24,11 +24,21 @@ const lengthOptions = {
 class Complexity {
     /**
      * @constructor
+     *
+     * @param {Object} opts                 Options Object
+     * @param {Number} opts.uppercase       Number of required chars - A through Z
+     * @param {Number} opts.lowercase       Number of required chars - a through z
+     * @param {Number} opts.special         Number of required chars - ! @ # $ & *
+     * @param {Number} opts.digit           Number of required chars - 0 through 9
+     * @param {Number} opts.alphaNumeric    Number of required chars - a through Z
+     * @param {Number} opts.min             Minumum number of chars
+     * @param {Number} opts.max             Maximum number of chars
+     * @param {Number} opts.exact           Exact number of chars
      */
     constructor(opts) {
-        const regex = '^';
+        let regex = '^';
 
-        for (var key in regexOptions) {
+        for (const key in regexOptions) {
             if (isNumber(opts[key])) {
                 regex += '(?=' + regexOptions[key].repeat(opts[key]) + ')';
             }
@@ -42,9 +52,9 @@ class Complexity {
         } else if (isNumber(opts.exact)) {
             regex += lengthOptions.exact.replace('n', opts.exact);
         } else {
-            regex += lengthOptions.no_limit
+            regex += lengthOptions.no_limit;
         }
-        regex += '$'
+        regex += '$';
 
         this.regex = new RegExp(regex);
     }
@@ -54,27 +64,27 @@ class Complexity {
     }
 
     checkError(str, options) {
-        var tempOption   = {}
-            , optionLength = {
-                min   : options.min,
-                max   : options.max,
-                exact : options.exact
-            }
-            , returnObject = {}
-            , str = str || ''
-        ;
-        for (var key in regexOptions) {
+        const tempOption = {};
+        const optionLength = {
+            min   : options.min,
+            max   : options.max,
+            exact : options.exact
+        };
+        const returnObject = {};
+        str = str || '';
+
+        for (const key in regexOptions) {
             if (isNumber(options[key])) {
                 tempOption[key]   = options[key];
-                returnObject[key] = check(str, tempOption);
+                returnObject[key] = this.check(str, tempOption);
                 delete tempOption[key];
             }
         }
-        for (key in optionLength) {
+        for (const key in optionLength) {
             if (isNumber(optionLength[key])) {
                 tempOption[key]   = optionLength[key];
-                returnObject[key] = check(str, tempOption);
-                delete tempOption[key]
+                returnObject[key] = this.check(str, tempOption);
+                delete tempOption[key];
             }
         }
         return returnObject;
@@ -83,7 +93,7 @@ class Complexity {
 }
 
 function isNumber(object) {
-  return typeof object === 'number';
+    return typeof object === 'number';
 }
 
 module.exports = Complexity;
