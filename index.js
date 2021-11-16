@@ -38,6 +38,10 @@ class Complexity {
     constructor(opts = {}) {
         this.opts = opts;
 
+        if (opts.exact !== undefined && (opts.min !== undefined || opts.max !== undefined)) {
+            throw new Error('exact and min/max options cannot be used together');
+        }
+
         let regex = '^';
 
         for (const key in regexOptions) {
@@ -56,6 +60,7 @@ class Complexity {
         } else {
             regex += lengthOptions.no_limit;
         }
+
         regex += '$';
 
         this.regex = new RegExp(regex);
