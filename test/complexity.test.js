@@ -107,3 +107,88 @@ test('Complexity(exact/max)', (t) => {
 
     t.end();
 });
+
+test('Complexity(lowercase)', (t) => {
+    try {
+        const c = new Complexity({
+            lowercase: 2
+        });
+
+        t.equals(c.check('4Fd'), false)
+        t.equals(c.check('e4Fd'), true)
+        t.equals(c.check('ee'), true)
+    } catch (err) {
+        t.error(err, 'no errors');
+    }
+
+    t.end();
+});
+
+test('Complexity(lowercase/min)', (t) => {
+    try {
+        const c = new Complexity({
+            min: 4,
+            lowercase: 2
+        });
+
+        t.equals(c.check('eDAFB'), false)
+        t.equals(c.check('eDAFe'), true)
+        t.equals(c.check('ee'), false)
+    } catch (err) {
+        t.error(err, 'no errors');
+    }
+
+    t.end();
+});
+
+test('Complexity(uppercase)', (t) => {
+    try {
+        const c = new Complexity({
+            uppercase: 2
+        });
+
+        t.equals(c.check('4Fd'), false)
+        t.equals(c.check('e4Fd'), false)
+        t.equals(c.check('FG'), true)
+        t.equals(c.check('Fd6@6G'), true)
+        t.equals(c.check('DSGFd6@6G'), true)
+    } catch (err) {
+        t.error(err, 'no errors');
+    }
+
+    t.end();
+});
+
+test('Complexity(uppercase/min)', (t) => {
+    try {
+        const c = new Complexity({
+            min: 4,
+            uppercase: 2
+        });
+
+        t.equals(c.check('eDAFB'), true)
+        t.equals(c.check('eDafe'), false)
+        t.equals(c.check('EE'), false)
+    } catch (err) {
+        t.error(err, 'no errors');
+    }
+
+    t.end();
+});
+
+test('Complexity(uppercase/digits)', (t) => {
+    try {
+        const c = new Complexity({
+            min: 4,
+            uppercase: 2
+        });
+
+        t.equals(c.check('eDAFB'), true)
+        t.equals(c.check('eDafe'), false)
+        t.equals(c.check('EE'), false)
+    } catch (err) {
+        t.error(err, 'no errors');
+    }
+
+    t.end();
+});

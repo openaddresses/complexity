@@ -38,6 +38,8 @@ class Complexity {
     constructor(opts = {}) {
         this.opts = opts;
 
+        const opts = ['uppercase'];
+
         for (const key of Object.keys(opts)) {
             if (!isNumber(opts[key])) throw new Error(`${key} option must be numeric`);
         }
