@@ -84,7 +84,7 @@ class Complexity {
 
     /**
      * Check a string against the built password rules
-     * and return which rules the password failed to fulfill
+     * and return false for rules the password does not meet
      *
      * @param {string} password Password to check
      *
@@ -93,26 +93,35 @@ class Complexity {
     checkError(password='') {
         const tempOption = {};
         const optionLength = {
-            min   : options.min,
-            max   : options.max,
-            exact : options.exact
+            min: this.opts.min,
+            max: this.opts.max,
+            exact: this.opts.exact
         };
+
         const returnObject = {};
 
         for (const key in regexOptions) {
-            if (isNumber(options[key])) {
-                tempOption[key]   = options[key];
-                returnObject[key] = this.check(password, tempOption);
+            if (isNumber(this.opts[key])) {
+                tempOption[key] = this.opts[key];
+
+                const c = new Complexity(tempOption);
+                returnObject[key] = c.check(password);
+
                 delete tempOption[key];
             }
         }
+
         for (const key in optionLength) {
             if (isNumber(optionLength[key])) {
                 tempOption[key]   = optionLength[key];
-                returnObject[key] = this.check(password, tempOption);
+
+                const c = new Complexity(tempOption);
+                returnObject[key] = c.check(password);
+
                 delete tempOption[key];
             }
         }
+
         return returnObject;
     }
 
