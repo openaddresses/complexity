@@ -32,32 +32,34 @@ const compexity = new Complexity({
 });
 ```
 
----
-#### complexity.check(str)
----
+#### `complexity.check(password)`
 
 Takes in a string to check against the regex that will be created from the options given. Return true if the string matches, returns false if it doesn't
 
-    if (complexity.check(pass, options)) {
-      // now that your password checks out...
-    }
+```js
+if (complexity.check(pass)) {
+  // now that your password checks out...
+}
+```
 
----
-#### complexity.checkError(str)
----
+#### `complexity.checkError(password)`
 
-This method is similar to one mentioned above, but rather than just returning true or false, it returns an object with all of the settings you passed in. For each key in the object, it will be set to true if the string passed in matches that setting, or false if the string passed in fails that setting.
+This method is similar to one mentioned above, but rather than just returning true or false,
+it returns an object with all of the settings you passed in. For each key in the object,
+it will be set to true if the string passed in matches that setting, or false if the string
+passed in fails that setting.
 
-    var passwordComplexity = complexity.checkError(pass, options)
+```js
+const passwordComplexity = complexity.checkError(pass)
 
-    console.log(passwordComplexity);
+console.log(passwordComplexity);
 
-    //  {
-    //    uppercase : true,
-    //    lowercase : true,
-    //    special   : false,
-    //    digit     : false,
-    //    min       : true,
-    //    max       : true
-    //  }
+//  {
+//    uppercase : true,
+//    lowercase : true,
+//    special   : false,
+//    digit     : false,
+//    min       : true,
+//    max       : true
+//  }
 
