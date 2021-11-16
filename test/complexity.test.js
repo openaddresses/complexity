@@ -13,6 +13,21 @@ test('Complexity()', (t) => {
     t.end();
 });
 
+test('Complexity(not-numeric)', (t) => {
+    try {
+        const c = new Complexity({
+            min: 'd'
+        });
+
+        t.fail('Should Error');
+    } catch (err) {
+        t.equals(err.message, 'min option must be numeric');
+    }
+
+    t.end();
+});
+
+
 test('Complexity(min)', (t) => {
     try {
         const c = new Complexity({
@@ -48,7 +63,7 @@ test('Complexity(max)', (t) => {
 test('Complexity(exact)', (t) => {
     try {
         const c = new Complexity({
-            exact: 5 
+            exact: 5
         });
 
         t.equals(c.check('1'), false)

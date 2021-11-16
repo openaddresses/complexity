@@ -38,6 +38,10 @@ class Complexity {
     constructor(opts = {}) {
         this.opts = opts;
 
+        for (const key of Object.keys(opts)) {
+            if (!isNumber(opts[key])) throw new Error(`${key} option must be numeric`);
+        }
+
         if (opts.exact !== undefined && (opts.min !== undefined || opts.max !== undefined)) {
             throw new Error('exact and min/max options cannot be used together');
         }
