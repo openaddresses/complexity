@@ -1,0 +1,34 @@
+{
+    "name": "@openaddresses/complexity",
+    "version": "1.0.0",
+    "description": "Password complexity tests",
+    "main": "index.js",
+    "scripts": {
+        "doc": "documentation build index.js -f html -o docs && documentation lint index.js",
+        "lint": "eslint index.js test/**.js",
+        "lint-doc": "documentation lint index.js",
+        "test": "tape test/**.test.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/openaddresses/complexity.git"
+    },
+    "keywords": [
+        "password",
+        "complexity"
+    ],
+    "author": "Nick Ingalls",
+    "license": "BSD",
+    "bugs": {
+        "url": "https://github.com/openaddresses/complexity/issues"
+    },
+    "homepage": "https://github.com/openaddresses/complexity#readme",
+    "devDependencies": {
+        "documentation": "^13.2.5",
+        "eslint": "^8.1.0",
+        "eslint-plugin-node": "^11.1.0",
+        "tape": "^5.2.2"
+    },
+    "dependencies": {
+    }
+}
