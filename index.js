@@ -55,7 +55,7 @@ class Complexity {
             }
         }
         if (isNumber(opts.min) && isNumber(opts.max)) {
-            regex += lengthOptions.range.replace('min', opts.ran).replace('max', opts.max);
+            regex += lengthOptions.range.replace('min', opts.min).replace('max', opts.max);
         } else if (isNumber(opts.max)) {
             regex += lengthOptions.max.replace('n', opts.max);
         } else if (isNumber(opts.min)) {
